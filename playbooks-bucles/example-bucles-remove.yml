@@ -1,0 +1,10 @@
+---
+- name: Instalar software
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  tasks:
+  - name: Instalar MariaDB
+    yum:
+      name: ['mariadb', 'mariadb-server']
+      state: absent

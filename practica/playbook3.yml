@@ -1,0 +1,13 @@
+---
+- name: Recoletar information
+  hosts: all
+  gather_facts: True
+  remote_user: admin-ngx
+  tasks:
+  - name: Obtener version de python
+    shell: python --version
+    register: data
+    become: True
+
+  - local_action: lineinfile line="--{{ ansible_hostname }}--{{ data }}--" path=/data/py-ver.txt
+~                   

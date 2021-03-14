@@ -1,0 +1,12 @@
+---
+- name: Recoletar information
+  hosts: all
+  gather_facts: True
+  remote_user: user-ansible
+  tasks:
+  - name: Obtener version de SSL
+    shell: openssl version
+    register: data
+    become: True
+
+  - local_action: lineinfile line="--{{ ansible_hostname }}--{{ data.stdout }}--" path=/info/info_servers.txt

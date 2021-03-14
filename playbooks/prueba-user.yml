@@ -1,0 +1,13 @@
+---
+- name: Playbook con variable
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  vars:
+    pass_default: redhat
+    user_name: prueba
+  tasks:
+  - name: Create user with ansible
+    user:
+      name: "{{ user_name }}"
+      password: "{{ pass_default | password_hash('sha512')}}"

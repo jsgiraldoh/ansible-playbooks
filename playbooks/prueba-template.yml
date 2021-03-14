@@ -1,0 +1,10 @@
+---
+- name: Prueba 2 de variables
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  tasks:
+  - name: Copiar fichero hosts con variables
+    template:
+      src: hosts
+      dest: /opt/data

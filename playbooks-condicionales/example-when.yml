@@ -1,0 +1,11 @@
+---
+- name: Instalar mariadb
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  tasks:
+  - name: Instalar mariadb
+    yum:
+      name: mariadb
+      state: absent
+    when: ansible_distribution == "CentOS"

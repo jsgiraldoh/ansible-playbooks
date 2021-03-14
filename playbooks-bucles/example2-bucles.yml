@@ -1,0 +1,14 @@
+---
+- name: Creacion de usuarios
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  tasks:
+  - name: Usuarios
+    user:
+      name: "{{ item.nombre }}"
+      state: present
+      group: "{{ item.grupo }}"
+    with_items:
+      - { nombre: usuario1, grupo: wheel }
+      - { nombre: usuario2, grupo: wheel }

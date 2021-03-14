@@ -1,0 +1,14 @@
+---
+- name: Prueba final
+  hosts: all
+  remote_user: admin-ngx
+  become: True
+  gather_facts: False
+  vars:
+    paquetes: "['tree', 'git', 'pigz', 'virt-who']"
+
+  tasks:
+  - name: Instalar software
+    yum:
+      name: "{{ paquetes }}"
+      state: latest

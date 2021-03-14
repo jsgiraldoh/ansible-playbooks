@@ -1,0 +1,21 @@
+---
+- name: Prueba final
+  hosts: all
+  remote_user: admin-ngx
+  become: True
+  gather_facts: False
+  vars:
+    lista_usuarios:
+      - {nombre: "jsgiraldoh1", grupo: "wheel", password: "ose2021"}
+      - {nombre: "jsgiraldoh2", grupo: "wheel", password: "ose2021"}
+      - {nombre: "jsgiraldoh3", grupo: "wheel", password: "ose2021"}
+      - {nombre: "jsgiraldoh4", grupo: "wheel", password: "ose2021"}
+      - {nombre: "jsgiraldoh5", grupo: "wheel", password: "ose2021"}
+  tasks:
+  - name: Crear usuarios
+    user:
+      name: "{{ item.nombre }}"
+      state: present
+      group: "{{ item.grupo }}"
+      password: "{{ item.password | password_hash('sha512')}}"
+    with_items: "{{ lista_usuarios }}"

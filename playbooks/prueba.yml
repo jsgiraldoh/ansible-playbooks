@@ -1,0 +1,14 @@
+---
+- name: Copiar del archivo Hosts
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  gather_facts: False
+  tasks:
+  - name: copiar fichero 1
+    copy:
+     src=/etc/hosts
+     dest=/etc/hosts2
+     owner=root
+     group=root
+     mode=0644

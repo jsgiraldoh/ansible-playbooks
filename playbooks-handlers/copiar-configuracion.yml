@@ -1,0 +1,17 @@
+---
+- name: Actualizar servicio ssh
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  tasks:
+  - name: Copiar configuracion
+    copy:
+      src: sshd_config
+      dest: /etc/ssh/sshd_config
+    notify: restart_service_sshd
+
+  handlers:
+  - name: restart_service_sshd
+    service:
+      name: sshd
+      state: restarted

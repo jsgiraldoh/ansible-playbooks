@@ -1,0 +1,25 @@
+---
+- name: Prueba final
+  hosts: all
+  remote_user: user-ansible
+  become: True
+  vars:
+    paquetes_mariadb: "['mariadb', 'mariadb-server']"
+    lista_usuarios:
+      - {nombre: "user1", grupo: "wheel", password: "redhat1"}
+      - {nombre: "user2", grupo: "wheel", password: "redhat2"}
+      - {nombre: "user3", grupo: "wheel", password: "redhat3"}
+
+  tasks:
+  - name: Instalar software
+    yum:
+      name: "{{ paquetes_mariadb }}"
+      state: latest
+
+  - name: Crear usuarios
+    user:
+      name: "{{ item.nombre }}"
+      state: present
+      group: "{{ item.grupo }}"
+      password: "{{ item.password | password_hash('sha512')}}"
+    with_items: "{{ lista_usuarios }}"
