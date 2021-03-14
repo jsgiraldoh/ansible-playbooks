@@ -39,7 +39,7 @@ Para poder gestionar los nodos clientes, se debe realizar una conexión SSH para
 
 ```
 useradd user-ansible
-echo “ose2020” | passwd user-ansible --stdin
+echo "ansible2021" | passwd user-ansible --stdin
 ```
 
 Editamos el archivo visudo, para habilitar los permisos al nuevo usuario.
